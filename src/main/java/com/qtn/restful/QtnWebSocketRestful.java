@@ -26,7 +26,7 @@ public class QtnWebSocketRestful {
             JSONObject json = new JSONObject();
             try{
                 String path = (String)param.get("path");
-                String organizerId = (String)param.get("organizerId");
+                String organizerId = String.valueOf(param.get("organizerId"));
                 if(path == null || organizerId == null){
                     json = RestfulRetUtils.getErrorMsg("51001","发送信息失败");
                     return json;
