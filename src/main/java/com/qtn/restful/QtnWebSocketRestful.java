@@ -35,7 +35,7 @@ public class QtnWebSocketRestful {
                 thread.setOrganizedId(organizerId);
                 thread.setPath(path);
                 thread.start();
-                thread.sleep(4000);
+                thread.sleep(8000);
                 json = RestfulRetUtils.getRetSuccess();
             }catch(Exception e){
                 logger.error(e.getMessage(),e);

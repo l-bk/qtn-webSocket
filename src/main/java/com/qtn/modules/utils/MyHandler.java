@@ -41,10 +41,11 @@ public class MyHandler implements WebSocketHandler{
     @Override
 	public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) throws Exception {
     	try{
-	    	JSONObject jsonobject = JSONObject.parseObject((String) webSocketMessage.getPayload());
-	    	System.out.println(jsonobject.get("id"));
-	    	System.out.println(jsonobject.get("message")+":来自"+(String)webSocketSession.getAttributes().get("WEBSOCKET_USERID")+"的消息");
-	    	sendMessageToUser(jsonobject.get("id")+"",new TextMessage("服务器收到了，hello!"));
+//	    	JSONObject jsonobject = JSONObject.parseObject((String) webSocketMessage.getPayload());
+	    	System.out.println("接受到数据了");
+//	    	System.out.println(jsonobject.get("id"));
+//	    	System.out.println(jsonobject.get("message")+":来自"+(String)webSocketSession.getAttributes().get("WEBSOCKET_USERID")+"的消息");
+//	    	sendMessageToUser(jsonobject.get("id")+"",new TextMessage("服务器收到了，hello!"));
     	 }catch(Exception e){
       	   e.printStackTrace();
          }
@@ -61,8 +62,10 @@ public class MyHandler implements WebSocketHandler{
         if (users.get(clientId) == null) return false;
         WebSocketSession session = users.get(clientId);
         System.out.println("sendMessage:" + session);
+
         if (!session.isOpen()) return false;
         try {
+            System.out.println("给js发送信息"+session.isOpen());
             session.sendMessage(message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,13 +105,13 @@ public class MyHandler implements WebSocketHandler{
             session.close();
         }
         System.out.println("连接出错");
-        users.remove(getClientId(session));
+//        users.remove(getClientId(session));
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         System.out.println("连接已关闭：" + status);
-        users.remove(getClientId(session));
+//        users.remove(getClientId(session));
     }
 
     @Override
