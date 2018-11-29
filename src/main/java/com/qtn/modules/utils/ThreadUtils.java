@@ -5,14 +5,14 @@ import org.springframework.web.socket.TextMessage;
 public class ThreadUtils extends Thread {
 
     private static String path =null;
-    private static String organizedId =null;
+    private static String organizerId =null;
 
-    public static String getOrganizedId() {
-        return organizedId;
+    public static String getOrganizerId() {
+        return organizerId;
     }
 
-    public static void setOrganizedId(String organizedId) {
-        ThreadUtils.organizedId = organizedId;
+    public static void setOrganizerId(String organizerId) {
+        ThreadUtils.organizerId = organizerId;
     }
 
     public static String getPath() {
@@ -27,7 +27,7 @@ public class ThreadUtils extends Thread {
     @Override
     public void run() {
         MyHandler handler =new MyHandler();
-        handler.sendMessageToUser(organizedId,new TextMessage(path));
+        handler.sendMessageToUser(organizerId,new TextMessage(path));
     }
 
 }
