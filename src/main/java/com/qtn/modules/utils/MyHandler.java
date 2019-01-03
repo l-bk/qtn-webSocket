@@ -1,6 +1,7 @@
 package com.qtn.modules.utils;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,14 +21,18 @@ public class MyHandler implements WebSocketHandler{
 	//在线用户列表
     public static  Map<String, WebSocketSession> users;
 
-    public static Map<String,Boolean> isConnection;
+//    public static Map<String,Boolean> isConnection;
+
+    public static Map<String,Long> lastDateList ;
+
 
     //判断语音发送到前端是否成功；
 //    public static Boolean isConnection = false;
 
     static {
         users = new HashMap<>();
-        isConnection =new HashMap<>();
+//        isConnection =new HashMap<>();?
+        lastDateList =new HashMap<>();
     }
     //新增socket
     @Override
@@ -37,7 +42,8 @@ public class MyHandler implements WebSocketHandler{
         System.out.println("新加入的机构Id："+organizerId);
          if (organizerId != null) {
              users.put(organizerId, session);
-             isConnection.put(organizerId,false);
+//             isConnection.put(organizerId,false);
+             lastDateList.put(organizerId,new Date().getTime());
 //             session.sendMessage(new TextMessage("成功建立socket连接"));
          }
          System.out.println("当前总连接数："+users.size());
@@ -50,7 +56,9 @@ public class MyHandler implements WebSocketHandler{
     	    String msg = webSocketMessage.getPayload().toString();
             if(msg.indexOf("isConnection_") != -1){
                 String organizerId= msg.replace("isConnection_","");
-                isConnection.put(organizerId,true);
+//                isConnection.put(organizerId,true);
+                lastDateList.put(organizerId,new Date().getTime());
+//                System.out.println("true："+organizerId);
             }
     	 }catch(Exception e){
       	   e.printStackTrace();
