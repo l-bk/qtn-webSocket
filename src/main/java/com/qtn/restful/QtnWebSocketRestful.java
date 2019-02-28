@@ -36,25 +36,6 @@ public class QtnWebSocketRestful {
                 thread.setPath(path);
                 thread.start();
                 thread.sleep(8000);
-           /*       Date date= new Date();
-                for(;;){
-                    if((new Date().getTime()-date.getTime())/(1000)>3){
-                        break;
-                    }
-                }
-              if(MyHandler.isSuccess){//发送成功证明连接还存在，将标识改为默认
-                    MyHandler.isSuccess = false;
-                }else{//连接默认状态标识发送没成功
-                    RedisUtils redis =new RedisUtils();
-                    String pathName = path.substring(0,path.indexOf("."));
-                    String value = pathName.replace(organizerId,"");
-                    if(value.indexOf("V") == -1){
-
-                    }else{
-
-                    }
-                }
-                if(MyHandler.)*/
                 json = RestfulRetUtils.getRetSuccess();
             }catch(Exception e){
                 logger.error(e.getMessage(),e);
@@ -80,10 +61,6 @@ public class QtnWebSocketRestful {
                     }
                 }
                 Boolean isConnec =  false;
-                //每秒接受前端的信息 超过一秒表示连接中断
-//                if((new Date().getTime()-MyHandler.lastDateList.get(organizerId))/1000 <1){
-//                    isConnec = true;
-//                }
                 //页面没连接过，直接返回false；
                 if (MyHandler.isConnection.get(organizerId) != null) {
                     //页面连接过，但中间可能出现断连的情况

@@ -27,7 +27,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
 
     @Override
     public void afterHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e) {
-    	System.out.println("进来webSocket的afterHandshake拦截器！");
+//    	System.out.println("进来webSocket的afterHandshake拦截器！");
     }
 
 

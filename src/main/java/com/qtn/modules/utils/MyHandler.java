@@ -23,30 +23,25 @@ public class MyHandler implements WebSocketHandler{
 
     public static Map<String,Boolean> isConnection;
 
-//    public static Map<String,Long> lastDateList ;
 
 
-    //判断语音发送到前端是否成功；
-//    public static Boolean isConnection = false;
 
     static {
         users = new HashMap<>();
         isConnection =new HashMap<>();
-//        lastDateList =new HashMap<>();
     }
     //新增socket
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-    	 System.out.println("成功建立连接");
+
         String organizerId = session.getUri().toString().split("organizerId=")[1];
-        System.out.println("新加入的机构Id："+organizerId);
+        System.out.println(organizerId + "成功建立连接");
          if (organizerId != null) {
              users.put(organizerId, session);
              isConnection.put(organizerId,false);
-//             lastDateList.put(organizerId,new Date().getTime());
-             session.sendMessage(new TextMessage("成功建立socket连接"));
+             session.sendMessage(new TextMessage( "成功建立socket连接"));
          }
-         System.out.println("当前总连接数："+users.size());
+//         System.out.println("当前总连接数："+users.size());
     }
 
     //接收socket信息
@@ -57,7 +52,6 @@ public class MyHandler implements WebSocketHandler{
             if(msg.indexOf("isConnection_") != -1){
                 String organizerId= msg.replace("isConnection_","");
                 isConnection.put(organizerId,true);
-//                lastDateList.put(organizerId,new Date().getTime());
                 System.out.println("true："+organizerId);
             }
     	 }catch(Exception e){
@@ -82,7 +76,6 @@ public class MyHandler implements WebSocketHandler{
             return false;
         }
         try {
-//            System.out.println("给js发送信息"+session.isOpen());
             session.sendMessage(message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,7 +115,7 @@ public class MyHandler implements WebSocketHandler{
             session.close();
         }
         System.out.println("连接出错");
-//        users.remove(getClientId(session));
+
     }
 
     @Override
