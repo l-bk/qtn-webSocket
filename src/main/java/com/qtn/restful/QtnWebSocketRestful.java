@@ -71,27 +71,27 @@ public class QtnWebSocketRestful {
             JSONObject json = new JSONObject();
             try {
                 String organizerId = String.valueOf(param.get("organizerId"));
-//                MyHandler handler = new MyHandler();
-//                handler.sendMessageToUser(organizerId, new TextMessage("验证连接"));
-//                Date date = new Date();
-//                for (; ; ) {
-//                    if ((new Date().getTime() - date.getTime()) / 1000 > 2)  {
-//                        break;
-//                    }
-//                }
+                MyHandler handler = new MyHandler();
+                handler.sendMessageToUser(organizerId, new TextMessage("验证连接"));
+                Date date = new Date();
+                for (; ; ) {
+                    if ((new Date().getTime() - date.getTime()) / 1000 > 2)  {
+                        break;
+                    }
+                }
                 Boolean isConnec =  false;
                 //每秒接受前端的信息 超过一秒表示连接中断
-                if((new Date().getTime()-MyHandler.lastDateList.get(organizerId))/1000 <1){
-                    isConnec = true;
-                }
-                //页面没连接过，直接返回false；
-//                if (MyHandler.isConnection.get(organizerId) != null) {
-//                    //页面连接过，但中间可能出现断连的情况
-//                    if (MyHandler.isConnection.get(organizerId)) {
-//                        isConnec = MyHandler.isConnection.get(organizerId);
-//                        MyHandler.isConnection.put(organizerId, false);
-//                    }
+//                if((new Date().getTime()-MyHandler.lastDateList.get(organizerId))/1000 <1){
+//                    isConnec = true;
 //                }
+                //页面没连接过，直接返回false；
+                if (MyHandler.isConnection.get(organizerId) != null) {
+                    //页面连接过，但中间可能出现断连的情况
+                    if (MyHandler.isConnection.get(organizerId)) {
+                        isConnec = MyHandler.isConnection.get(organizerId);
+                        MyHandler.isConnection.put(organizerId, false);
+                    }
+                }
                 json = RestfulRetUtils.getRetSuccess(isConnec);
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
